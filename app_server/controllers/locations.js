@@ -5,7 +5,7 @@ const apiOptions = {
   server: 'http://localhost:3000'
 };
 if(process.env.NODE_ENV === 'production'){
-  apiOptions.server = 'https://loc8rv2.herokuapp.com';
+  apiOptions.server = 'https://loc8r-api-0i5a.onrender.com';
 }
 
 const requestOptions = {
