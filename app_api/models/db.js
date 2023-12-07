@@ -1,16 +1,17 @@
 const mongoose = require('mongoose');
 const host = process.env.DB_HOST || '127.0.0.1'
-const dbURI = `mongodb://${host}/Loc8r`;
-// const dbURI = 'mongodb+srv://my_atlas_user:PASSWORD@cluster0.s0fko.mongodb.net/Loc8r';
+// const dbURL = `mongodb://${host}/Loc8r`;
+const dbURL = 'mongodb+srv://myatlasdbuser:1234567890a@cluster0.ryifkuo.mongodb.net/Loc8r';
 
 const readLine = require('readline');
+mongoose.set("strictQuery", false);
 
 const connect = () => {
-  setTimeout(() => mongoose.connect(dbURI, { useNewUrlParser: true }), 1000);
+  setTimeout(() => mongoose.connect(dbURL, { useNewUrlParser: true }), 1000);
 }
 
 mongoose.connection.on('connected', () => {
-  console.log('Mongoose connected to ' + dbURI);
+  console.log('Mongoose connented to ' + dbURL);
 });
 
 mongoose.connection.on('error', err => {
@@ -19,7 +20,7 @@ mongoose.connection.on('error', err => {
 });
 
 mongoose.connection.on('disconnected', () => {
-  console.log('disconnected');
+  console.log('disconnected to ' + dbURL);
 });
 
 if (process.platform === 'win32') {
@@ -58,3 +59,5 @@ process.on('SIGTERM', () => {
 connect();
 
 require('./locations');
+require('./users');
+
